@@ -1,49 +1,69 @@
-import { applyFilters } from '@wordpress/hooks'
-import classnames from 'classnames'
-import { getIconSVGBase64 } from './util'
-import { RichText } from '@wordpress/block-editor'
+/**
+ * WordPress dependencies
+ */
+import { applyFilters } from '@wordpress/hooks';
+import { Component } from '@wordpress/element';
+import {
+    InnerBlocks,
+    RichText,
+} from '@wordpress/block-editor';
 
-const save = props => {
-	const { className } = props
-	const {
-		icon,
-		iconShape,
-		iconColor,
-		iconSize,
-		text,
-		columns,
-		gap,
-		design = '',
-	} = props.attributes
+/**
+ * Internal dependencies
+ */
+import metadata from './block.json';
 
-	const mainClasses = classnames( [
-		className,
-		'ugb-icon-list-wrapper',
-	], applyFilters( 'stackable.icon-list.mainclasses', {}, design, props ) )
+const { name } = metadata;
 
-	const ulClasses = classnames( [
-		'ugb-icon-list',
-		`ugb-icon--icon-${ icon }`,
-		`ugb-icon--columns-${ columns }`,
-	], applyFilters( 'stackable.icon-list.ulclasses', {}, design, props ) )
+/**
+ * Block Save Class.
+ */
+class BlockSave extends Component {
+    render() {
+        const {
+            number,
+            animateInViewport,
+            numberPosition,
+            showContent,
+        } = this.props.attributes;
 
-	const iconSVGString = getIconSVGBase64( icon, iconShape, iconColor )
-	const style = {
-		'--icon': 'url(\'data:image/svg+xml;base64,' + iconSVGString + '\')',
-		'--icon-size': iconSize ? `${ iconSize }px` : undefined,
-		'--gap': gap ? `${ gap }px` : undefined,
-	}
+        let {
+            animateInViewportFrom,
+        } = this.props.attributes;
 
-	return (
-		<div className={ mainClasses }>
-			<RichText.Content
-				tagName="ul"
-				className={ ulClasses }
-				style={ style }
-				value={ text }
-			/>
-		</div>
-	)
+        animateInViewportFrom = parseFloat( animateInViewportFrom );
+
+        let className = 'ghostkit-counter-box';
+
+        className = applyFilters( 'ghostkit.blocks.className', className, {
+            ...{
+                name,
+            },
+            ...this.props,
+        } );
+
+        return (
+            <div className={ className }>
+                <div
+                    className={ `ghostkit-counter-box-number ghostkit-counter-box-number-align-${ numberPosition ? numberPosition : 'left' }` }
+                >
+                    <RichText.Content
+                        tagName="div"
+                        className={ `ghostkit-counter-box-number-wrap${ animateInViewport ? ' ghostkit-count-up' : '' }` }
+                        value={ number }
+                        { ...{
+                            'data-count-from': animateInViewport && animateInViewportFrom ? animateInViewportFrom : null,
+                        } }
+                    />
+                </div>
+                { showContent ? (
+                    <div className="ghostkit-counter-box-content">
+                        <InnerBlocks.Content />
+                    </div>
+                ) : '' }
+            </div>
+        );
+    }
 }
 
-export default save
+export default BlockSave;

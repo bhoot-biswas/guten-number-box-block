@@ -27,10 +27,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @uses {wp-editor} for WP editor styles.
  * @since 1.0.0
  */
-function icon_list_block_cgb_block_assets() { // phpcs:ignore
+function number_box_block_cgb_block_assets() { // phpcs:ignore
 	// Register block styles for both frontend + backend.
 	wp_register_style(
-		'icon_list_block-cgb-style-css', // Handle.
+		'number_box_block-cgb-style-css', // Handle.
 		plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ), // Block style CSS.
 		array( 'wp-editor' ), // Dependency to include the CSS after it.
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.style.build.css' ) // Version: File modification time.
@@ -38,7 +38,7 @@ function icon_list_block_cgb_block_assets() { // phpcs:ignore
 
 	// Register block editor script for backend.
 	wp_register_script(
-		'icon_list_block-cgb-block-js', // Handle.
+		'number_box_block-cgb-block-js', // Handle.
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ), // Block.build.js: We register the block here. Built with Webpack.
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ), // Dependencies, defined above.
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ), // Version: filemtime — Gets file modification time.
@@ -47,7 +47,7 @@ function icon_list_block_cgb_block_assets() { // phpcs:ignore
 
 	// Register block editor styles for backend.
 	wp_register_style(
-		'icon_list_block-cgb-block-editor-css', // Handle.
+		'number_box_block-cgb-block-editor-css', // Handle.
 		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), // Block editor CSS.
 		array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
 		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ) // Version: File modification time.
@@ -55,7 +55,7 @@ function icon_list_block_cgb_block_assets() { // phpcs:ignore
 
 	// WP Localized globals. Use dynamic PHP stuff in JavaScript via `cgbGlobal` object.
 	wp_localize_script(
-		'icon_list_block-cgb-block-js',
+		'number_box_block-cgb-block-js',
 		'cgbGlobal', // Array containing dynamic data for a JS Global.
 		[
 			'pluginDirPath' => plugin_dir_path( __DIR__ ),
@@ -75,17 +75,17 @@ function icon_list_block_cgb_block_assets() { // phpcs:ignore
 	 * @since 1.16.0
 	 */
 	register_block_type(
-		'bengal-studio/icon-list',
+		'bengal-studio/number-box',
 		[
 			// Enqueue blocks.style.build.css on both frontend & backend.
-			'style'         => 'icon_list_block-cgb-style-css',
+			'style'         => 'number_box_block-cgb-style-css',
 			// Enqueue blocks.build.js in the editor only.
-			'editor_script' => 'icon_list_block-cgb-block-js',
+			'editor_script' => 'number_box_block-cgb-block-js',
 			// Enqueue blocks.editor.build.css in the editor only.
-			'editor_style'  => 'icon_list_block-cgb-block-editor-css',
+			'editor_style'  => 'number_box_block-cgb-block-editor-css',
 		]
 	);
 }
 
 // Hook: Block assets.
-add_action( 'init', 'icon_list_block_cgb_block_assets' );
+add_action( 'init', 'number_box_block_cgb_block_assets' );

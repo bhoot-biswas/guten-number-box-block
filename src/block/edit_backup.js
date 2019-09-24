@@ -62,6 +62,8 @@ class BlockEdit extends Component {
 
         className = classnames( 'ghostkit-counter-box', className );
 
+        className = applyFilters( 'ghostkit.editor.className', className, this.props );
+
         return (
             <Fragment>
                 <InspectorControls>

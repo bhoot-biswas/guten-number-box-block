@@ -4,13 +4,13 @@
  * Enqueued in the editor only.
  */
 
- // UL is a child when in block form, remove the bullets.
- .ugb-icon-list ul {
- 	list-style: none !important;
+ // fix content block height
+ .ghostkit-counter-box-content > .editor-inner-blocks > .editor-block-list__layout > .editor-block-list__block:first-child > .editor-block-list__block-edit {
+     margin-top: 0;
  }
-
- // Hide the list formatting toolbar buttons since we cannot use those.
- // Depends on https://github.com/WordPress/gutenberg/pull/12527
- .editor-block-list__block[data-type="ugb/icon-list"] .list-format-toolbar {
- 	display: none;
+ .ghostkit-counter-box-content > .editor-inner-blocks > .editor-block-list__layout > .editor-block-list__block:last-child > .editor-block-list__block-edit {
+     margin-bottom: 0;
+ }
+ .ghostkit-counter-box-content > .editor-inner-blocks > .editor-block-list__layout > :not(.editor-block-list__block):empty:last-child {
+     margin-bottom: -31px;
  }

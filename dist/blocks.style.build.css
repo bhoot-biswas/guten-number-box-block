@@ -9,56 +9,40 @@
  *
  * CSS for both Frontend+Backend.
  */
-.ugb-icon-list {
-  margin: 0 0 1.5em 0 !important;
-  padding: 0 !important;
-  list-style: none !important; }
-  .ugb-icon-list li::before {
-    content: "";
-    display: inline-block;
-    vertical-align: middle;
-    height: var(--icon-size, 20px);
-    width: var(--icon-size, 20px);
-    margin-right: 1em;
-    background-image: var(--icon);
-    background-size: cover;
-    background-position: center;
-    -webkit-transform: translateY(-10%);
-        -ms-transform: translateY(-10%);
-            transform: translateY(-10%); }
-  .ugb-icon-list li {
-    margin-top: 0 !important;
-    margin-bottom: var(--gap, 16) !important;
-    list-style: none !important;
-    text-indent: calc(var(--icon-size, 20px) * -1 - 1em) !important;
-    padding-left: calc(var(--icon-size, 20px) + 1em) !important; }
-    .ugb-icon-list li ul {
-      margin-top: var(--gap, 16) !important;
-      list-style: none;
-      margin-left: 0; }
-  .ugb-icon-list li:last-child {
-    margin-bottom: 0; }
-  .ugb-icon-list.ugb-icon--columns-2, .ugb-icon-list.column-2 {
-    -webkit-columns: 2;
-       -moz-columns: 2;
-            columns: 2; }
-  .ugb-icon-list.ugb-icon--columns-3, .ugb-icon-list.column-3 {
-    -webkit-columns: 3;
-       -moz-columns: 3;
-            columns: 3; }
-  @media screen and (max-width: 600px) {
-    .ugb-icon-list.ugb-icon--columns-3, .ugb-icon-list.column-3 {
-      -webkit-columns: 2;
-         -moz-columns: 2;
-              columns: 2; } }
-  .ugb-icon-list.ugb-icon-columns-2 li, .ugb-icon-list.ugb-icon-columns-3 li, .ugb-icon-list.column-2 li, .ugb-icon-list.column-3 li {
-    page-break-inside: avoid;
-    /* Firefox */
-    -webkit-column-break-inside: avoid;
-            break-inside: avoid; }
-
-@media all and (-ms-high-contrast: none) {
-  *::-ms-backdrop, .ugb-icon-list li {
-    list-style: inside disc !important; }
-    *::-ms-backdrop:before, .ugb-icon-list li:before {
-      content: none !important; } }
+.ghostkit-counter-box {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding: 1.5em;
+  border: 1px solid #e9ecef;
+  border-radius: 4px; }
+  .ghostkit-counter-box .ghostkit-counter-box-number {
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transition: .2s color ease-in-out;
+    -o-transition: .2s color ease-in-out;
+    transition: .2s color ease-in-out; }
+    .ghostkit-counter-box .ghostkit-counter-box-number ~ .ghostkit-counter-box-content {
+      padding-left: 1.5em; }
+  .ghostkit-counter-box .ghostkit-counter-box-number-align-right {
+    -ms-flex-order: 2;
+        order: 2;
+    padding-right: 0; }
+    .ghostkit-counter-box .ghostkit-counter-box-number-align-right ~ .ghostkit-counter-box-content {
+      padding-right: 1.5em;
+      padding-left: 0; }
+  .ghostkit-counter-box .ghostkit-counter-box-number-align-top {
+    -ms-flex: 100%;
+        flex: 100%;
+    -ms-flex-pack: center;
+        justify-content: center;
+    padding-right: 0; }
+    .ghostkit-counter-box .ghostkit-counter-box-number-align-top ~ .ghostkit-counter-box-content {
+      -ms-flex: 100%;
+          flex: 100%;
+      padding-top: 1.5em;
+      padding-left: 0; }
+  .ghostkit-counter-box .ghostkit-counter-box-content {
+    -ms-flex: 1;
+        flex: 1; }

@@ -1,42 +1,45 @@
 {
-	"name": "bengal-studio/icon-list",
+	"name": "ghostkit/bumber-box",
 	"category": "common",
+	"supports": {
+		"html": false,
+		"className": false,
+		"anchor": true,
+		"align": ["wide", "full"]
+	},
 	"attributes": {
-		"url": {
-			"type": "string"
+		"number": {
+			"type": "array",
+			"source": "children",
+			"selector": ".ghostkit-counter-box-number-wrap",
+			"default": "77"
 		},
-		"id": {
-			"type": "number"
-		},
-		"hasParallax": {
+		"animateInViewport": {
 			"type": "boolean",
 			"default": false
 		},
-		"dimRatio": {
+		"animateInViewportFrom": {
+			"type": "number",
+			"default": 0
+		},
+		"numberPosition": {
+			"type": "string",
+			"default": "top"
+		},
+		"numberSize": {
 			"type": "number",
 			"default": 50
 		},
-		"overlayColor": {
-			"type": "string"
+		"showContent": {
+			"type": "boolean",
+			"default": true
 		},
-		"customOverlayColor": {
-			"type": "string"
-		},
-		"backgroundType": {
+		"numberColor": {
 			"type": "string",
-			"default": "image"
+			"default": "#0366d6"
 		},
-		"focalPoint": {
-			"type": "object"
-		},
-		"minHeight": {
-			"type": "number"
-		},
-		"cardTitle": {
-			"type": "string",
-			"source": "html",
-			"selector": ".bengal-studio-card__title",
-			"default": ""
+		"hoverNumberColor": {
+			"type": "string"
 		}
 	}
 }
