@@ -8,11 +8,20 @@ import classnames from 'classnames/dedupe';
  */
 import {
     applyFilters,
+    Component,
+    Fragment,
 } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
-import { Component, Fragment } from '@wordpress/element';
-
-const {
+import {
+    InspectorControls,
+    InnerBlocks,
+    BlockControls,
+    RichText,
+	PanelColorSettings,
+    FontSizePicker,
+    withFontSizes,
+} from '@wordpress/block-editor';
+import {
     BaseControl,
     PanelBody,
     TextControl,
@@ -21,20 +30,8 @@ const {
     TabPanel,
     Toolbar,
     ColorIndicator,
-} = wp.components;
-
-const {
-    InspectorControls,
-    InnerBlocks,
-    BlockControls,
-    RichText,
-} = wp.editor;
-
-/**
- * Internal dependencies
- */
-import ColorPicker from './components/color-picker/index.js';
-import ApplyFilters from './components/apply-filters/index.js';
+} from '@wordpress/components';
+import { compose } from '@wordpress/compose';
 
 /**
  * Block Edit Class.
@@ -45,19 +42,18 @@ class BlockEdit extends Component {
             attributes,
             setAttributes,
             isSelected,
+            fallbackFontSize,
+            fontSize,
+			setFontSize,
         } = this.props;
 
         let { className = '' } = this.props;
 
         const {
             number,
-            animateInViewport,
-            animateInViewportFrom,
             numberPosition,
-            numberSize,
             showContent,
             numberColor,
-            hoverNumberColor,
         } = attributes;
 
         className = classnames( 'ghostkit-counter-box', className );
@@ -66,14 +62,10 @@ class BlockEdit extends Component {
             <Fragment>
                 <InspectorControls>
                     <PanelBody>
-                        <RangeControl
-                            label={ __( 'Number Size' ) }
-                            value={ numberSize }
-                            onChange={ ( value ) => setAttributes( { numberSize: value } ) }
-                            min={ 20 }
-                            max={ 100 }
-                            beforeIcon="editor-textcolor"
-                            afterIcon="editor-textcolor"
+                        <FontSizePicker
+                            fallbackFontSize={ fallbackFontSize }
+                            value={ fontSize.size }
+                            onChange={ setFontSize }
                         />
                         <BaseControl
                             label={ __( 'Number Position' ) }
@@ -102,61 +94,28 @@ class BlockEdit extends Component {
                     </PanelBody>
                     <PanelBody>
                         <ToggleControl
-                            label={ __( 'Animate in viewport' ) }
-                            checked={ !! animateInViewport }
-                            onChange={ ( val ) => setAttributes( { animateInViewport: val } ) }
-                        />
-                        <ToggleControl
                             label={ __( 'Show Content' ) }
                             checked={ !! showContent }
                             onChange={ ( val ) => setAttributes( { showContent: val } ) }
                         />
-                        { animateInViewport ? (
-                            <TextControl
-                                label={ __( 'Animate from' ) }
-                                type="number"
-                                value={ animateInViewportFrom }
-                                onChange={ ( value ) => setAttributes( { animateInViewportFrom: parseInt( value, 10 ) } ) }
-                            />
-                        ) : '' }
                     </PanelBody>
-                    <PanelBody title={ (
-                        <Fragment>
-                            { __( 'Colors' ) }
-                            <ColorIndicator colorValue={ numberColor } />
-                        </Fragment>
-                    ) } initialOpen={ false }>
-                        <TabPanel
-                            className="ghostkit-control-tabs"
-                            tabs={ [
-                                {
-                                    name: 'normal',
-                                    title: __( 'Normal' ),
-                                    className: 'ghostkit-control-tabs-tab',
-                                },
-                                {
-                                    name: 'hover',
-                                    title: __( 'Hover' ),
-                                    className: 'ghostkit-control-tabs-tab',
-                                },
-                            ] }>
-                            {
-                                ( tabData ) => {
-                                    const isHover = tabData.name === 'hover';
-                                    return (
-                                        <ApplyFilters name="ghostkit.editor.controls" attribute={ isHover ? 'hoverNumberColor' : 'numberColor' } props={ this.props }>
-                                            <ColorPicker
-                                                label={ __( 'Color' ) }
-                                                value={ isHover ? hoverNumberColor : numberColor }
-                                                onChange={ ( val ) => setAttributes( isHover ? { hoverNumberColor: val } : { numberColor: val } ) }
-                                                alpha={ true }
-                                            />
-                                        </ApplyFilters>
-                                    );
-                                }
-                            }
-                        </TabPanel>
-                    </PanelBody>
+                    <PanelColorSettings
+    					initialOpen={ false }
+    					title={ __( 'Colors' ) }
+    					colorSettings={[
+    						{
+    							label: __( 'Number Color' ),
+    							value: numberColor,
+    							onChange: ( nextColor, ...whatelse ) => {
+    								setAttributes(
+    									{
+    										numberColor: nextColor
+    									}
+    								)
+    							}
+    						}
+    					]}
+    				/>
                 </InspectorControls>
                 <BlockControls>
                     <Toolbar controls={ [
@@ -185,6 +144,10 @@ class BlockEdit extends Component {
                         <RichText
                             tagName="div"
                             className="ghostkit-counter-box-number-wrap"
+                            style={ {
+            					fontSize: fontSize.size ? fontSize.size + 'px' : undefined,
+            					color: numberColor,
+            				} }
                             placeholder={ __( 'Add number…' ) }
                             value={ number }
                             onChange={ ( value ) => setAttributes( { number: value } ) }
@@ -207,4 +170,8 @@ class BlockEdit extends Component {
     }
 }
 
-export default BlockEdit;
+const Edit = compose( [
+	withFontSizes( 'fontSize' ),
+] )( BlockEdit );
+
+export default Edit;

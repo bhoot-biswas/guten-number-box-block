@@ -4,37 +4,6 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
-.ghostkit-component-color-picker-wrapper .ghostkit-component-color-picker-wrapper + .ghostkit-component-color-picker-wrapper {
-  margin-top: -5px; }
-
-.ghostkit-component-color-picker-wrapper > .components-base-control__field {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-align: center;
-      align-items: center;
-  -ms-flex-pack: justify;
-      justify-content: space-between;
-  margin-top: 16px; }
-  .ghostkit-component-color-picker-wrapper > .components-base-control__field .components-color-palette__item-wrapper {
-    margin: 0; }
-    .ghostkit-component-color-picker-wrapper > .components-base-control__field .components-color-palette__item-wrapper > .components-color-palette__item {
-      background-image: -webkit-linear-gradient(45deg, #ddd 25%, transparent 0), -webkit-linear-gradient(135deg, #ddd 25%, transparent 0), -webkit-linear-gradient(45deg, transparent 75%, #ddd 0), -webkit-linear-gradient(135deg, transparent 75%, #ddd 0);
-      background-image: -o-linear-gradient(45deg, #ddd 25%, transparent 0), -o-linear-gradient(135deg, #ddd 25%, transparent 0), -o-linear-gradient(45deg, transparent 75%, #ddd 0), -o-linear-gradient(135deg, transparent 75%, #ddd 0);
-      background-image: linear-gradient(45deg, #ddd 25%, transparent 0), linear-gradient(-45deg, #ddd 25%, transparent 0), linear-gradient(45deg, transparent 75%, #ddd 0), linear-gradient(-45deg, transparent 75%, #ddd 0);
-      background-position: 0 0, 0 5px, 5px -5px, -5px 0;
-      background-size: 10px 10px; }
-
-.ghostkit-component-color-picker .ghostkit-component-color-picker-palette {
-  margin: 0 17px; }
-
-.ghostkit-component-color-picker .components-color-palette {
-  margin: 0; }
-/**
- * #.# Common SCSS
- *
- * Can include things like variables and mixins
- * that are used across the project.
-*/
 /**
  * Editor styles for the Card Block.
  *

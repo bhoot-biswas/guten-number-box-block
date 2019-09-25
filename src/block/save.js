@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import classnames from 'classnames';
+
+/**
  * WordPress dependencies
  */
 import { applyFilters } from '@wordpress/hooks';
@@ -6,6 +11,7 @@ import { Component } from '@wordpress/element';
 import {
     InnerBlocks,
     RichText,
+    getFontSizeClass,
 } from '@wordpress/block-editor';
 
 /**
@@ -22,25 +28,22 @@ class BlockSave extends Component {
     render() {
         const {
             number,
-            animateInViewport,
             numberPosition,
             showContent,
+            numberColor,
+            fontSize,
+		    customFontSize,
         } = this.props.attributes;
 
-        let {
-            animateInViewportFrom,
-        } = this.props.attributes;
+        const fontSizeClass = getFontSizeClass( fontSize );
+        const className = classnames( {
+    		'ghostkit-counter-box': true,
+    		[ fontSizeClass ]: fontSizeClass,
+    	} );
 
-        animateInViewportFrom = parseFloat( animateInViewportFrom );
-
-        let className = 'ghostkit-counter-box';
-
-        className = applyFilters( 'ghostkit.blocks.className', className, {
-            ...{
-                name,
-            },
-            ...this.props,
-        } );
+    	const styles = {
+    		fontSize: fontSizeClass ? undefined : customFontSize,
+    	};
 
         return (
             <div className={ className }>
@@ -49,11 +52,9 @@ class BlockSave extends Component {
                 >
                     <RichText.Content
                         tagName="div"
-                        className={ `ghostkit-counter-box-number-wrap${ animateInViewport ? ' ghostkit-count-up' : '' }` }
+                        className="ghostkit-counter-box-number-wrap"
+                        style={ styles }
                         value={ number }
-                        { ...{
-                            'data-count-from': animateInViewport && animateInViewportFrom ? animateInViewportFrom : null,
-                        } }
                     />
                 </div>
                 { showContent ? (
