@@ -43,6 +43,7 @@ class BlockSave extends Component {
 
     	const styles = {
     		fontSize: fontSizeClass ? undefined : customFontSize,
+            color: numberColor,
     	};
 
         return (
