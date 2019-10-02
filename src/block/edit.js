@@ -2,6 +2,7 @@
  * External dependencies
  */
 import classnames from 'classnames/dedupe';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /**
  * WordPress dependencies
@@ -34,6 +35,30 @@ import {
 import { compose } from '@wordpress/compose';
 
 /**
+ * Internal dependencies
+ */
+import {
+    IconControl,
+} from '@bengal-studio/components';
+
+/**
+ * Functions
+ */
+export const getIconArray = value => {
+	if ( typeof value !== 'string' ) {
+		return null
+	}
+	if ( ! value.match( /\w*-/ ) ) {
+		return null
+	}
+	return [
+		value.match( /\w*/ ), // Prefix.
+		// value.match( /\w*/ )[ 0 ], // Prefix.
+		value.match( /\w+-(.*)$/ )[ 1 ], // Icon name.
+	]
+}
+
+/**
  * Block Edit Class.
  */
 class BlockEdit extends Component {
@@ -52,11 +77,14 @@ class BlockEdit extends Component {
         const {
             number,
             numberPosition,
-            showContent,
             numberColor,
+            showContent,
+            showBadge,
+            badgeIcon,
         } = attributes;
 
-        className = classnames( 'ghostkit-counter-box', className );
+        className = classnames( 'bengal-studio-number-card', className );
+        const selectedIcon = getIconArray( badgeIcon );
 
         return (
             <Fragment>
@@ -92,12 +120,24 @@ class BlockEdit extends Component {
                             ] } />
                         </BaseControl>
                     </PanelBody>
-                    <PanelBody>
+                    <PanelBody
+                        title={ __( 'Settings' ) }
+                        initialOpen={ false }>
                         <ToggleControl
                             label={ __( 'Show Content' ) }
                             checked={ !! showContent }
                             onChange={ ( val ) => setAttributes( { showContent: val } ) }
                         />
+                        <ToggleControl
+                            label={ __( 'Show Badge' ) }
+                            checked={ !! showBadge }
+                            onChange={ ( showBadge ) => setAttributes( { showBadge } ) }
+                        />
+                        { showBadge && ( <IconControl
+                            label={ __( 'Icon' ) }
+                            value={ badgeIcon }
+                            onChange={ ( badgeIcon ) => setAttributes( { badgeIcon } ) }
+                        /> ) }
                     </PanelBody>
                     <PanelColorSettings
     					initialOpen={ false }
@@ -140,10 +180,10 @@ class BlockEdit extends Component {
                     ] } />
                 </BlockControls>
                 <div className={ className }>
-                    <div className={ `ghostkit-counter-box-number ghostkit-counter-box-number-align-${ numberPosition ? numberPosition : 'left' }` }>
+                    <div className={ `bengal-studio-number-card__number bengal-studio-number-card__number--align-${ numberPosition ? numberPosition : 'left' }` }>
                         <RichText
                             tagName="div"
-                            className="ghostkit-counter-box-number-wrap"
+                            className="bengal-studio-number-card__number-container"
                             style={ {
             					fontSize: fontSize.size ? fontSize.size + 'px' : undefined,
             					color: numberColor,
@@ -155,15 +195,21 @@ class BlockEdit extends Component {
                             isSelected={ isSelected }
                             keepPlaceholderOnFocus
                         />
+
+                        { showBadge && (
+                            <div className="bengal-studio-number-card__badge">
+                                <FontAwesomeIcon icon={ selectedIcon } />
+                            </div>
+                        ) }
                     </div>
-                    { showContent ? (
-                        <div className="ghostkit-counter-box-content">
+                    { showContent && (
+                        <div className="bengal-studio-number-card__content">
                             <InnerBlocks
                                 template={ [ [ 'core/paragraph', { content: __( 'Wow, this is an important counts, that you should know!' ) } ] ] }
                                 templateLock={ false }
                             />
                         </div>
-                    ) : '' }
+                    ) }
                 </div>
             </Fragment>
         );

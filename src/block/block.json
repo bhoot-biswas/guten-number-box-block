@@ -1,12 +1,12 @@
 {
-	"name": "ghostkit/number-box",
+	"name": "bengal-studio/number-card",
 	"category": "common",
 	"attributes": {
 		"number": {
 			"type": "array",
 			"source": "children",
-			"selector": ".ghostkit-counter-box-number-wrap",
-			"default": "77"
+			"selector": ".bengal-studio-number-card__number-container",
+			"default": "100"
 		},
 		"numberPosition": {
 			"type": "string",
@@ -18,13 +18,20 @@
 		"customFontSize": {
 			"type": "number"
 		},
+		"numberColor": {
+			"type": "string",
+			"default": "#0366d6"
+		},
 		"showContent": {
 			"type": "boolean",
 			"default": true
 		},
-		"numberColor": {
-			"type": "string",
-			"default": "#0366d6"
-		}
+		"showBadge": {
+			"type": "boolean",
+			"default": true
+		},
+		"badgeIcon": {
+    		"type": "string"
+    	}
 	}
 }

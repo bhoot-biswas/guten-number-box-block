@@ -3,44 +3,60 @@
  *
  * CSS for both Frontend+Backend.
  */
+.bengal-studio-number-card {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 1.5em;
+	border: 1px solid $gray-200;
+	border-radius: 4px;
 
- .ghostkit-counter-box {
-     display: flex;
-     flex-wrap: wrap;
-     padding: 1.5em;
-     border: 1px solid $gray-200;
-     border-radius: 4px;
+	&__number {
+		position: relative;
+        display: flex;
+		transition: 0.2s color ease-in-out;
 
-     .ghostkit-counter-box-number {
-         display: flex;
-         transition: .2s color ease-in-out;
+		~ .bengal-studio-number-card__content {
+			padding-left: 1.5em;
+		}
+	}
 
-         ~ .ghostkit-counter-box-content {
-             padding-left: 1.5em;
-         }
-     }
-     .ghostkit-counter-box-number-align-right {
-         order: 2;
-         padding-right: 0;
+	&__number--align-right {
+		order: 2;
+		padding-right: 0;
 
-         ~ .ghostkit-counter-box-content {
-             padding-right: 1.5em;
-             padding-left: 0;
-         }
-     }
-     .ghostkit-counter-box-number-align-top {
-         flex: 100%;
-         justify-content: center;
-         padding-right: 0;
+		~ .bengal-studio-number-card__content {
+			padding-right: 1.5em;
+			padding-left: 0;
+		}
+	}
 
-         ~ .ghostkit-counter-box-content {
-             flex: 100%;
-             padding-top: 1.5em;
-             padding-left: 0;
-         }
-     }
+	&__number--align-top {
+		flex: 100%;
+		justify-content: center;
+		padding-right: 0;
 
-     .ghostkit-counter-box-content {
-         flex: 1;
-     }
- }
+		~ .bengal-studio-number-card__content {
+			flex: 100%;
+			padding-top: 1.5em;
+			padding-left: 0;
+		}
+	}
+
+	&__badge {
+		width: 2rem;
+		height: 2rem;
+		position: absolute;
+		right: 0;
+		top: 100%;
+		margin-top: -3rem;
+		margin-right: -1rem;
+		border-radius: $border-radius;
+		text-align: center;
+		background-color: theme-color('success');
+		color: $white;
+	}
+
+	&__content {
+		flex: 1;
+	}
+}

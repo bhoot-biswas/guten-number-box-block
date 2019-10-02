@@ -1,8 +1,12 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
+import {
+	__
+} from '@wordpress/i18n';
+import {
+	registerBlockType
+} from '@wordpress/blocks';
 
 /**
  * Internal dependencies
@@ -18,9 +22,9 @@ import './style.scss';
 
 
 const {
-    name,
-    category,
-    attributes
+	name,
+	category,
+	attributes
 } = metadata;
 
 /**
@@ -36,17 +40,17 @@ const {
  * @return {?WPBlock}          The block, if it has been successfully
  *                             registered; otherwise `undefined`.
  */
-registerBlockType( name, {
-    // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
-	title: __( 'number-box-block - Gutenberg Block' ), // Block title.
-    description: __( 'Show your progress and rewards using counting numbers.' ),
+registerBlockType(name, {
+	// Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
+	title: __('number-box-block - Gutenberg Block'), // Block title.
+	description: __('Show your progress and rewards using counting numbers.'),
 	icon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category, // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
-		__( 'number-box-block — Gutenberg Number Box' ),
-		__( 'create-guten-block' ),
+		__('number-box-block — Gutenberg Number Box'),
+		__('create-guten-block'),
 	],
-    attributes,
-    edit,
-    save,
-} );
+	attributes,
+	edit,
+	save,
+});

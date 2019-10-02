@@ -9,7 +9,7 @@
  *
  * CSS for both Frontend+Backend.
  */
-.ghostkit-counter-box {
+.bengal-studio-number-card {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
@@ -17,32 +17,45 @@
   padding: 1.5em;
   border: 1px solid #e9ecef;
   border-radius: 4px; }
-  .ghostkit-counter-box .ghostkit-counter-box-number {
+  .bengal-studio-number-card__number {
+    position: relative;
     display: -ms-flexbox;
     display: flex;
-    -webkit-transition: .2s color ease-in-out;
-    -o-transition: .2s color ease-in-out;
-    transition: .2s color ease-in-out; }
-    .ghostkit-counter-box .ghostkit-counter-box-number ~ .ghostkit-counter-box-content {
+    -webkit-transition: 0.2s color ease-in-out;
+    -o-transition: 0.2s color ease-in-out;
+    transition: 0.2s color ease-in-out; }
+    .bengal-studio-number-card__number ~ .bengal-studio-number-card__content {
       padding-left: 1.5em; }
-  .ghostkit-counter-box .ghostkit-counter-box-number-align-right {
+  .bengal-studio-number-card__number--align-right {
     -ms-flex-order: 2;
         order: 2;
     padding-right: 0; }
-    .ghostkit-counter-box .ghostkit-counter-box-number-align-right ~ .ghostkit-counter-box-content {
+    .bengal-studio-number-card__number--align-right ~ .bengal-studio-number-card__content {
       padding-right: 1.5em;
       padding-left: 0; }
-  .ghostkit-counter-box .ghostkit-counter-box-number-align-top {
+  .bengal-studio-number-card__number--align-top {
     -ms-flex: 100%;
         flex: 100%;
     -ms-flex-pack: center;
         justify-content: center;
     padding-right: 0; }
-    .ghostkit-counter-box .ghostkit-counter-box-number-align-top ~ .ghostkit-counter-box-content {
+    .bengal-studio-number-card__number--align-top ~ .bengal-studio-number-card__content {
       -ms-flex: 100%;
           flex: 100%;
       padding-top: 1.5em;
       padding-left: 0; }
-  .ghostkit-counter-box .ghostkit-counter-box-content {
+  .bengal-studio-number-card__badge {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: -3rem;
+    margin-right: -1rem;
+    border-radius: 0.25rem;
+    text-align: center;
+    background-color: #28a745;
+    color: #fff; }
+  .bengal-studio-number-card__content {
     -ms-flex: 1;
         flex: 1; }

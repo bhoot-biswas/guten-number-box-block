@@ -2,24 +2,34 @@
  * External dependencies
  */
 import classnames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 /**
  * WordPress dependencies
  */
-import { applyFilters } from '@wordpress/hooks';
-import { Component } from '@wordpress/element';
 import {
     InnerBlocks,
     RichText,
     getFontSizeClass,
 } from '@wordpress/block-editor';
+import { Component } from '@wordpress/element';
 
 /**
- * Internal dependencies
+ * Functions
  */
-import metadata from './block.json';
-
-const { name } = metadata;
+export const getIconArray = value => {
+	if ( typeof value !== 'string' ) {
+		return null
+	}
+	if ( ! value.match( /\w*-/ ) ) {
+		return null
+	}
+	return [
+		value.match( /\w*/ ), // Prefix.
+		// value.match( /\w*/ )[ 0 ], // Prefix.
+		value.match( /\w+-(.*)$/ )[ 1 ], // Icon name.
+	]
+}
 
 /**
  * Block Save Class.
@@ -33,11 +43,14 @@ class BlockSave extends Component {
             numberColor,
             fontSize,
 		    customFontSize,
+            showBadge,
+            badgeIcon,
         } = this.props.attributes;
 
         const fontSizeClass = getFontSizeClass( fontSize );
+        const selectedIcon = getIconArray( badgeIcon );
         const className = classnames( {
-    		'ghostkit-counter-box': true,
+    		'bengal-studio-number-card': true,
     		[ fontSizeClass ]: fontSizeClass,
     	} );
 
@@ -49,17 +62,22 @@ class BlockSave extends Component {
         return (
             <div className={ className }>
                 <div
-                    className={ `ghostkit-counter-box-number ghostkit-counter-box-number-align-${ numberPosition ? numberPosition : 'left' }` }
+                    className={ `bengal-studio-number-card__number bengal-studio-number-card__number--align-${ numberPosition ? numberPosition : 'left' }` }
                 >
                     <RichText.Content
                         tagName="div"
-                        className="ghostkit-counter-box-number-wrap"
+                        className="bengal-studio-number-card__number-container"
                         style={ styles }
                         value={ number }
                     />
+                    { showBadge && (
+                        <div className="bengal-studio-number-card__badge">
+                            <FontAwesomeIcon icon={ selectedIcon } />
+                        </div>
+                    ) }
                 </div>
                 { showContent ? (
-                    <div className="ghostkit-counter-box-content">
+                    <div className="bengal-studio-number-card__content">
                         <InnerBlocks.Content />
                     </div>
                 ) : '' }

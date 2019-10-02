@@ -136,7 +136,7 @@ module.exports = {
 	externals: externals,
     resolve: {
         alias: {
-            '@card-block': paths.pluginSrc
+            '@bengal-studio': paths.pluginSrc
         }
     },
 };
