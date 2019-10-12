@@ -23,7 +23,9 @@
     display: flex;
     -webkit-transition: 0.2s color ease-in-out;
     -o-transition: 0.2s color ease-in-out;
-    transition: 0.2s color ease-in-out; }
+    transition: 0.2s color ease-in-out;
+    -ms-flex-align: center;
+        align-items: center; }
     .bengal-studio-number-card__number ~ .bengal-studio-number-card__content {
       padding-left: 1.5em; }
   .bengal-studio-number-card__number--align-right {
@@ -47,11 +49,9 @@
   .bengal-studio-number-card__badge {
     width: 2rem;
     height: 2rem;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    margin-top: -3rem;
-    margin-right: -1rem;
+    position: relative;
+    margin-left: -1rem;
+    margin-bottom: -2rem;
     border-radius: 0.25rem;
     text-align: center;
     background-color: #28a745;
